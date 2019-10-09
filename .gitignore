@@ -1,32 +1,52 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long n;
+    cin>>n;
+    for(long i=0;i<n;i++)
+    {
+        map<char,long>mp1;  //count of unique variables in string 1
+        map<char,long>mp2; //count of unique variables in string 2
+        map<char,long>v;   //visitor flag
+        string x,y;
+        cin>>x>>y;
+        if(x==y)
+        {
+            cout<<0<<"\n";
+            continue;
+        }
+        long c=0;
+        for(long j=0;j<x.length();j++)
+        {
+            mp1[x[j]]=mp1[x[j]]+1;
+        }
+        for(long j=0;j<y.length();j++)
+        {
+            mp2[y[j]]=mp2[y[j]]+1;
+        }
+        x.resize(std::distance(x.begin(),unique(x.begin(),x.end())));
+        y.resize(std::distance(y.begin(),unique(y.begin(),y.end())));
+        if(x==y)
+        {
+            for(long j=0;j<x.length();j++)
+            {
+               
+                if(v[x[j]]==0)
+                {
+                    c=c+abs(mp1[x[j]]-mp2[y[j]]);
+                    v[x[j]]=1;
+                }
+            }
+            cout<<c<<"\n";
+            c=0;
+        }
+        else
+        {
+            cout<<-1<<"\n";
+            continue;
+        }
+        
+    }
+    return 0;
+}
